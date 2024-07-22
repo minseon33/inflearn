@@ -4,17 +4,18 @@ package tobyspring.hellospring;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import tobyspring.hellospring.exrate.CachedExRateProvider;
 import tobyspring.hellospring.payment.ExRateProvider;
 import tobyspring.hellospring.exrate.WebApiExRatePaymentProvider;
 import tobyspring.hellospring.payment.PaymentService;
 
+import java.time.Clock;
+
 @Configuration   //어떤빈 클래스와 어떤빈 클래스가 관계를 맺는다는 것을 알려주는 어노테이션 Configuration
 @ComponentScan
-public class ObjectFactory {
+public class PaymentConfig {
     @Bean
     public PaymentService paymentService() {
-        return new PaymentService(exRateProvider());
+        return new PaymentService(exRateProvider(),clock());
     }
 
 //    @Bean
@@ -30,5 +31,10 @@ public class ObjectFactory {
     @Bean
     public ExRateProvider exRateProvider(){
         return new WebApiExRatePaymentProvider();
+    }
+
+    @Bean
+    public Clock clock(){
+        return Clock.systemDefaultZone();
     }
 }
