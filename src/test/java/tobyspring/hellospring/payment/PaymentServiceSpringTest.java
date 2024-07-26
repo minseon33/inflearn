@@ -31,7 +31,7 @@ class PaymentServiceSpringTest {
     Clock clock;
 
     @Test
-    public void ConvertedAmount() throws IOException {
+    public void ConvertedAmount() {
         Payment payment = paymentService.prepare(1L, "USD", BigDecimal.TEN);
         assertThat(payment.getExRate()).isEqualByComparingTo(valueOf(1000));
         assertThat(payment.getConvertedAmount()).isEqualByComparingTo(valueOf(10_000));
@@ -44,7 +44,7 @@ class PaymentServiceSpringTest {
     }
 
     @Test
-    void validUntil() throws IOException {
+    void validUntil() {
         PaymentService paymentService = new PaymentService((new ExRateProviderStub(valueOf(1_000))), clock);
         Payment payment = paymentService.prepare(1L, "USD", BigDecimal.TEN);
 

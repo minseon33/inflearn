@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URISyntaxException;
 import java.time.Clock;
 import java.time.LocalDateTime;
 
@@ -20,7 +21,7 @@ public class PaymentService {
 
 
 
-    public Payment prepare(Long orderId, String currency, BigDecimal foreignCurrencyAmount) throws IOException {
+    public Payment prepare(Long orderId, String currency, BigDecimal foreignCurrencyAmount) {
 
         BigDecimal exRate = exRateProvider.getExRate(currency);
 
