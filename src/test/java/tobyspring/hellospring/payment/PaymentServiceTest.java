@@ -2,7 +2,6 @@ package tobyspring.hellospring.payment;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.lang.NonNull;
 
@@ -35,7 +34,7 @@ class PaymentServiceTest {
     @Test
     void validUntil() throws IOException {
         PaymentService paymentService = new PaymentService((new ExRateProviderStub(valueOf(1_000))), clock);
-        Pament payment = paymentService.prepare(1L, "USD", BigDecimal.TEN);
+        Payment payment = paymentService.prepare(1L, "USD", BigDecimal.TEN);
 
         //valid until이 prepare() 30분 뒤로 설정됐는가?
         LocalDateTime now = LocalDateTime.now(this.clock);
@@ -48,11 +47,11 @@ class PaymentServiceTest {
     private static void getPament(BigDecimal exRate, BigDecimal convertedAmount, Clock clock) throws IOException {
 
         PaymentService paymentService = new PaymentService(new ExRateProviderStub(exRate),clock);
-        Pament pament = paymentService.prepare(1L, "USD", BigDecimal.TEN);
+        Payment payment = paymentService.prepare(1L, "USD", BigDecimal.TEN);
         //환율정보 가져온다
-        assertThat(pament.getExRate()).isEqualByComparingTo(exRate);
+        assertThat(payment.getExRate()).isEqualByComparingTo(exRate);
         //원화환산금액 계산
-        assertThat(pament.getConvertedAmount()).isEqualByComparingTo(convertedAmount);
+        assertThat(payment.getConvertedAmount()).isEqualByComparingTo(convertedAmount);
     }
 
 }
