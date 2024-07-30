@@ -4,6 +4,9 @@ package tobyspring.hellospring;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.JdkClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
+import tobyspring.hellospring.exrate.RestTemplateExRateProvider;
 import tobyspring.hellospring.payment.ExRateProvider;
 import tobyspring.hellospring.exrate.WebApiExRatePaymentProvider;
 import tobyspring.hellospring.payment.PaymentService;
@@ -18,19 +21,14 @@ public class PaymentConfig {
         return new PaymentService(exRateProvider(),clock());
     }
 
-//    @Bean
-//    public PaymentService paymentService() {
-//        return new PaymentService(cashedExRateProvider());
-//    }
-
-//    @Bean
-//    public ExRateProvider cashedExRateProvider(){
-//        return new CachedExRateProvider(exRateProvider());
-//    }
+    @Bean
+    public RestTemplate restTemplate(){
+        return new RestTemplate();
+    }
 
     @Bean
     public ExRateProvider exRateProvider(){
-        return new WebApiExRatePaymentProvider();
+        return new RestTemplateExRateProvider(restTemplate());
     }
 
     @Bean
