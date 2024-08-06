@@ -4,6 +4,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import tobyspring.hellospring.order.Order;
 import tobyspring.hellospring.order.OrderService;
+import tobyspring.hellospring.order.OrderServiceImpl;
 
 import java.math.BigDecimal;
 
@@ -14,24 +15,6 @@ public class OrderClient {
 
         Order order = orderService.createOrder("0100", BigDecimal.TEN);
         System.out.println("Order : "+ order);
-
-
-//        try {
-//            //em
-//            new TransactionTemplate(transactionManager).execute(status -> {
-//
-//                Order order = new Order("100", BigDecimal.TEN);
-//                repository.save(order);
-//                System.out.println("order : " + order);
-//
-//                return null;
-//            });
-//
-//        }catch(DataIntegrityViolationException e){
-//            System.out.println("주문번호 중복 복구 작업");
-//        }
-
-
 
     }
 }
