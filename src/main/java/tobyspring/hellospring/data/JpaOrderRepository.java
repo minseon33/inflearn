@@ -2,14 +2,13 @@ package tobyspring.hellospring.data;
 
 import jakarta.persistence.*;
 import tobyspring.hellospring.order.Order;
+import tobyspring.hellospring.order.OrderRepository;
 
-import java.math.BigDecimal;
-
-public class OrderRepository {
+public class JpaOrderRepository implements OrderRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
-
+    @Override
     public void save(Order order){
         entityManager.persist(order);
     }

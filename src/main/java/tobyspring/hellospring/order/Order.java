@@ -1,16 +1,12 @@
 package tobyspring.hellospring.order;
 
-import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "orders")
+
 public class Order {
-    @Id
-    @GeneratedValue // 아이디값 알아서 넣어줘라
+
     private Long id;
-    @Column(unique = true) // 데이터가 고유해야 한다.
+
     private String no;
 
     private BigDecimal total;
@@ -42,5 +38,9 @@ public class Order {
                 ", no='" + no + '\'' +
                 ", total=" + total +
                 '}';
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
